@@ -14,11 +14,6 @@ manifest:
     - name: acpica
       revision: 8d24867bc9c9d81c81eeac59391cda59333affd4
       path: modules/lib/acpica
-    - name: edtt
-      revision: b9ca3c7030518f07b7937dacf970d37a47865a76
-      path: tools/edtt
-      groups:
-        - tools
     - name: fatfs
       revision: 427159bf95ea49b7680facffaa29ad506b42709b
       path: modules/fs/fatfs
