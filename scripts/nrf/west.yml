@@ -24,7 +24,7 @@ manifest:
       path: modules/fs/fatfs
       groups:
         - fs
-     - name: cmsis
+    - name: cmsis
       revision: 4b96cbb174678dcd3ca86e11e1f24bc5f8726da0
       path: modules/hal/cmsis
       groups:
