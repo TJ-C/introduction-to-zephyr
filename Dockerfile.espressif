@@ -1,9 +1,8 @@
-# Zephyr development image for Espressif targets (e.g. ESP32)
+# Zephyr development image for Nordic targets (e.g. micro:bit)
 
 # Settings
 ARG DEBIAN_VERSION=stable-20241016-slim
 ARG PASSWORD="zephyr"
-# Zephyr 3.7.0 is not working with ESP32S3, see: https://github.com/zephyrproject-rtos/zephyr/issues/71397
 #ARG ZEPHYR_RTOS_VERSION=3.7.0
 ARG ZEPHYR_RTOS_COMMIT=26603cefaf41298c417f2eee834ed40d9ab35d3a
 ARG ZEPHYR_SDK_VERSION=0.16.8
@@ -13,7 +12,7 @@ ARG VS_CODE_EXT_CPPTOOLS_VERSION=1.22.10
 ARG VS_CODE_EXT_HEX_EDITOR_VERSION=1.11.1
 ARG VS_CODE_EXT_CMAKETOOLS_VERSION=1.19.52
 ARG VS_CODE_EXT_NRF_DEVICETREE_VERSION=2024.9.26
-ARG TOOLCHAIN_LIST="-t xtensa-espressif_esp32_zephyr-elf -t xtensa-espressif_esp32s2_zephyr-elf -t xtensa-espressif_esp32s3_zephyr-elf"
+ARG TOOLCHAIN_LIST="-t arm-zephyr-eabi"
 ARG WGET_ARGS="-q --show-progress --progress=bar:force:noscroll"
 ARG VIRTUAL_ENV=/opt/venv
 
@@ -122,7 +121,7 @@ RUN cd /opt/toolchains && \
     python3 -m pip install -r scripts/requirements-base.txt
 
 # Override the west manifest to only install necessary modules
-COPY scripts/espressif/west.yml /opt/toolchains/zephyr/west.yml
+COPY scripts/nrf/west.yml /opt/toolchains/zephyr/west.yml
 
 # Instantiate west workspace and install tools
 RUN cd /opt/toolchains && \
@@ -131,7 +130,7 @@ RUN cd /opt/toolchains && \
 
 # Install module-specific blobs
 RUN cd /opt/toolchains && \
-    west blobs fetch hal_espressif
+    west blobs fetch hal_nordic
 
 #-------------------------------------------------------------------------------
 # Zephyr SDK
